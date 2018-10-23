@@ -1,52 +1,44 @@
-# react-search-lunr
+# react-search-fuse
 
-A Lunr powered client side search react component.
+A Fuse.js powered client side fuzzy search react component.
 
 **disclaimer**: This is still a bit of a work in progress. It has some limitations, so use at your discretion
 
 [![Build 
-Status](https://semaphoreci.com/api/v1/twostoryrobot/react-search-lunr/branches/master/shields_badge.svg)](https://semaphoreci.com/twostoryrobot/react-search-lunr)
+Status](https://semaphoreci.com/api/v1/twostoryrobot/react-search-fuse/branches/master/shields_badge.svg)](https://semaphoreci.com/twostoryrobot/react-search-fuse)
 
 ## Installation and Usage
 
-    npm install react-search-lunr
+    npm install react-search-fuse
 
-Import `ReactSearchLunr` where you would like to use it.
+Import `ReactSearchFuse` where you would like to use it.
 
 ```js
-import ReactSearchLunr from 'react-search-lunr'
+import ReactSearchFuse from 'react-search-fuse'
 ```
 
-Supply some `documents`, specify the `id` (`ref` in Lunr), some `fields`, and a
-`filter` to search by. Then just supply a `children` render function which will
+Supply some `documents`, specify the `options`, and a `filter` to search by.
+Then just supply a `children` render function which will
 receive `results`.
 
 ```jsx
-<ReactSearchLunr
-  id="id"
-  fields=["name", "body"]
+<ReactSearchFuse
+  options={{keys: ['name', 'character']}}
   documents=[
-    {name: 'aldrin', body:'followed neil armstrong to the moon'},
-    {name: 'armstrong', body: 'first to land on the moon'}
+    {id: 1, name: 'Logan', character:'Wolverine'},
+    {id: 2, name: 'Anna Marie', character: 'Rogue'}
   ]>
   {results => result.map(result => (
-    <h1>{result.item.name}</h1>
-    <p>{result.item.body}</p>
+    <div key={result.id}>
+      <h1>{result.name}</h1> - {result.character}
+    </div>
   ))}
-</ReactSearchLunr>
+</ReactSearchFuse>
 ```
-
-## Errors
-
-`ReactSearchLunr` does not catch errors that Lunr throws (e.g. `QueryParseError`), so
-you should wrap `ReactSearchLunr` in an [error
-boundary](https://reactjs.org/docs/error-boundaries.html) component. This is
-particularly helpful if you are piping user input into the `filter` prop.
 
 ## Todo
 
 This isn't quite finished. Some of the planned changes:
 
-- passing a compiled Lunr index
-- allow updating of `documents` after component construction
-- probably some performance tweaks
+- the fuse index is rebuild on every rerender, it could probably be more
+  performant
