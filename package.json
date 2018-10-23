@@ -1,21 +1,22 @@
 {
-  "name": "react-search-lunr",
-  "version": "0.0.3",
-  "description": "Lunr, as a React component",
+  "name": "react-search-fuse",
+  "version": "0.0.1",
+  "description": "Fuse.js, as a React component",
   "keywords": [
     "react",
-    "lunr",
+    "fuse.js",
+    "fuse",
     "search"
   ],
-  "homepage": "https://github.com/twostoryrobot/react-search-lunr",
+  "homepage": "https://github.com/twostoryrobot/react-search-fuse",
   "bugs": {
-    "url": "https://github.com/twostoryrobot/react-search-lunr/issues"
+    "url": "https://github.com/twostoryrobot/react-search-fuse/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/twostoryrobot/react-search-lunr.git"
+    "url": "https://github.com/twostoryrobot/react-search-fuse.git"
   },
-  "main": "dist/react-search-lunr.js",
+  "main": "dist/react-search-fuse.js",
   "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -48,7 +49,7 @@
     "fuse.js": ">= 3.3"
   },
   "scripts": {
-    "build": "babel react-search-lunr.js --out-dir dist",
+    "build": "babel react-search-fuse.js --out-dir dist",
     "eslint": "eslint --ignore-path .gitignore '**/*.js'",
     "prettier": "prettier --ignore-path .gitignore --write '**/*.+(js|json|md|mdx)'",
     "prettier:check": "prettier --ignore-path .gitignore --list-different '**/*.+(js|json|md|mdx)'",

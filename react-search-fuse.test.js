@@ -27,11 +27,12 @@ const mapResults = results =>
   ))
 
 test('should render only results matching initial filter', async () => {
+  const options = {
+    keys: ['name', 'character', 'team']
+  }
+
   const { container, queryByText } = render(
-    <ReactSearchFuse
-      documents={documents}
-      fields={['name', 'character', 'team']}
-      filter="Avengers">
+    <ReactSearchFuse documents={documents} options={options} filter="Avengers">
       {mapResults}
     </ReactSearchFuse>
   )
@@ -44,8 +45,9 @@ test('should render only results matching initial filter', async () => {
 })
 
 test('should only index specified fields', async () => {
+  const options = { keys: ['name'] }
   const { queryByText } = render(
-    <ReactSearchFuse documents={documents} fields={['name']} filter="Avengers">
+    <ReactSearchFuse documents={documents} options={options} filter="Avengers">
       {mapResults}
     </ReactSearchFuse>
   )
@@ -55,11 +57,9 @@ test('should only index specified fields', async () => {
 })
 
 test('updating filter will rerender with new results', async () => {
+  const options = { keys: ['name', 'character', 'team'] }
   const { queryByText, rerender } = render(
-    <ReactSearchFuse
-      documents={documents}
-      fields={['name', 'character', 'team']}
-      filter="Avengers">
+    <ReactSearchFuse documents={documents} options={options} filter="Avengers">
       {mapResults}
     </ReactSearchFuse>
   )
@@ -69,10 +69,7 @@ test('updating filter will rerender with new results', async () => {
 
   // change the filter, rerender
   rerender(
-    <ReactSearchFuse
-      documents={documents}
-      fields={['name', 'character', 'team']}
-      filter="X">
+    <ReactSearchFuse documents={documents} options={options} filter="X">
       {mapResults}
     </ReactSearchFuse>
   )

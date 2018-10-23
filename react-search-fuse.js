@@ -4,18 +4,12 @@ import PropTypes from 'prop-types'
 import Fuse from 'fuse.js'
 
 class ReactSearchFuse extends React.Component {
-  constructor(props) {
-    super(props)
-    const options = {
-      keys: props.fields
-    }
-    const fuse = new Fuse(props.documents, options)
-    this.state = { fuse }
-  }
-
   getResults(filter) {
+    const { documents, options } = this.props
+    const fuse = new Fuse(documents, options)
+
     if (!filter) return []
-    const results = this.state.fuse.search(filter)
+    const results = fuse.search(filter)
     return results
   }
 
@@ -26,8 +20,7 @@ class ReactSearchFuse extends React.Component {
 }
 
 ReactSearchFuse.propTypes = {
-  fields: PropTypes.arrayOf(PropTypes.string),
-  id: PropTypes.string,
+  options: PropTypes.object,
   documents: PropTypes.arrayOf(PropTypes.object),
   filter: PropTypes.string,
   children: PropTypes.func
