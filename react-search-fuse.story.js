@@ -3,8 +3,19 @@ import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 import { create } from 'reworm'
 
-import ReactSearchLunr from './react-search-lunr'
-import moonwalkers from './moonwalkers'
+import ReactSearchFuse from './react-search-fuse'
+
+const documents = [
+  { id: 'a', character: 'Wolverine', name: 'Logan', team: 'X-Men' },
+  { id: 'b', character: 'Hulk', name: 'Bruce Banner', team: 'Avengers' },
+  {
+    id: 'c',
+    character: 'Black Widow',
+    name: 'Natasha Romanoff',
+    team: 'Avengers'
+  },
+  { id: 'd', character: 'Rogue', name: 'Anna Marie', team: 'X-Men' }
+]
 
 const { get, set } = create({ filter: '' })
 
@@ -34,12 +45,12 @@ ErrorBoundary.propTypes = {
 
 const renderResults = results =>
   results.map(result => (
-    <p key={result.ref}>
-      <strong>{result.item.name}</strong> - {result.item.body}
+    <p key={result.id}>
+      <strong>{result.name}</strong> - {result.character} - {result.team}
     </p>
   ))
 
-storiesOf('ReactSearchLunr', module)
+storiesOf('ReactSearchFuse', module)
   .add('interactive', () =>
     get(s => (
       <div>
@@ -48,26 +59,26 @@ storiesOf('ReactSearchLunr', module)
           value={s.filter}
         />
         <ErrorBoundary key={s.filter}>
-          <ReactSearchLunr
+          <ReactSearchFuse
             id="id"
-            fields={['name', 'body']}
+            fields={['name', 'character', 'team']}
             filter={s.filter}
-            documents={moonwalkers}>
+            documents={documents}>
             {renderResults}
-          </ReactSearchLunr>
+          </ReactSearchFuse>
         </ErrorBoundary>
       </div>
     ))
   )
   .add('initial filter', () => (
     <div>
-      Initial Filter: alan
-      <ReactSearchLunr
+      Initial Filter: Wolverine
+      <ReactSearchFuse
         id="id"
-        fields={['name', 'body']}
-        filter="alan"
-        documents={moonwalkers}>
+        fields={['name', 'character', 'team']}
+        filter="Wolverine"
+        documents={documents}>
         {renderResults}
-      </ReactSearchLunr>
+      </ReactSearchFuse>
     </div>
   ))

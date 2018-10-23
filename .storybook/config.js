@@ -1,7 +1,7 @@
 import { configure } from '@storybook/react'
 
 function loadStories() {
-  require('../react-lunr.story.js')
+  require('../react-search-fuse.story.js')
 }
 
 configure(loadStories, module)
