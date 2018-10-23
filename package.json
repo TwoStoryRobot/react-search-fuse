@@ -1,6 +1,6 @@
 {
   "name": "react-search-fuse",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Fuse.js, as a React component",
   "keywords": [
     "react",
